@@ -1,45 +1,47 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Omar's Portfolio</title>
-    <meta name="description" content="Simple  portfolio website with JS features." />
-    <!-- Link external CSS -->
+    <title>Omar's Portfolio — Assignment 2</title>
+    <meta name="description" content="Interactive portfolio with theme toggle, greeting, API fetch, and form validation." />
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- Link external JS -->
-<script src="js/script.js"></script>
-
   </head>
-
   <body>
     <!-- Header -->
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#top">Omar's Portfolio</a>
-        <nav class="site-nav">
+        <nav class="site-nav" aria-label="Primary">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#contact">Contact</a>
         </nav>
-        <button id="themeToggle" class="btn" title="Toggle dark/light">☼</button>
+        <button id="themeToggle" class="btn" title="Toggle dark/light" aria-pressed="false">☼</button>
       </div>
     </header>
 
-    <!-- Main -->
     <main id="top">
       <!-- Hero -->
       <section id="hero" class="hero">
         <div class="container hero-grid">
           <div>
             <p id="greeting" class="subtitle">Welcome!</p>
-            <h1 class="tagline">Turning the raw data into meaningful insights.</h1>
-            <p class="subtitle">This portfolio is the foundation of the Assignment 1.</p>
-            <a class="btn primary" href="#projects">View Projects</a>
+            <h1 class="tagline">Turning raw data into meaningful insights.</h1>
+            <p class="subtitle">This site builds on Assignment 1 and adds interactive features.</p>
+
+            <!-- Remember my name (LocalStorage) -->
+            <form id="nameForm" class="row" autocomplete="on">
+              <input id="nameInput" name="name" type="text" placeholder="Enter your name" aria-label="Your name" />
+              <button class="btn primary" type="submit">Save name</button>
+            </form>
+
+            <a class="btn" href="#projects" style="margin-top:.6rem">View Projects</a>
           </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="520" height="360" viewBox="0 0 520 360" aria-label="Illustration">
+
+          <div aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="520" height="360" viewBox="0 0 520 360">
               <defs>
                 <linearGradient id="bg" x1="0" x2="1">
                   <stop offset="0%" stop-color="#dbeafe"/>
@@ -55,16 +57,35 @@
         </div>
       </section>
 
-      <!-- About -->
+      <!-- About + API demo -->
       <section id="about" class="section">
-        <div class="container">
+        <div class="container card">
           <h2>About Me</h2>
           <p>
-            My name is Omar Alharbi, a student in king fahad university passionate about Data Analysis and problem-solving.
-            I enjoy working with datasets, exploring trends, and building visualizations that
-            turn numbers into stories.
+            I’m Omar Alharbi, a KFUPM student focused on Data Analysis and problem-solving.
+            I like exploring datasets and turning numbers into stories.
           </p>
-          <p>Tagline: <em>“From data to value.”</em></p>
+
+          <details class="expander">
+            <summary>What I’m focusing on now</summary>
+            <ul>
+              <li>Modern JS & performance</li>
+              <li>Accessibility (a11y)</li>
+              <li>AI-assisted productivity</li>
+            </ul>
+          </details>
+
+          <div class="api-block">
+            <h3>Fun Fact (Public API)</h3>
+            <div class="row gap">
+              <button id="loadFact" class="btn">Load a Cat Fact 🐱</button>
+              <span class="loading hidden" role="status" aria-live="polite">Loading…</span>
+            </div>
+            <p id="factText" class="fade" aria-live="polite"></p>
+            <p id="factError" class="error hidden">Couldn’t load a fact.
+              <button id="retryBtn" class="btn" type="button">Retry</button>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -72,38 +93,28 @@
       <section id="projects" class="section alt">
         <div class="container">
           <h2>Projects</h2>
-          <div class="project-grid">
-            <article class="project-card">
-              <img src="https://placehold.co/1200x600/svg?text=Sales+Dashboard" alt="Sales Dashboard preview" />
-              <div class="project-content">
-                <h3>Sales Dashboard</h3>
-                <p>A data dashboard that visualize monthly sales trends and KPIs using Python and Power BI.</p>
-              </div>
-            </article>
-            <article class="project-card">
-              <img src="https://placehold.co/1200x600/svg?text=Customer+Churn+Analysis" alt="Customer churn analysis preview" />
-              <div class="project-content">
-                <h3>Customer Churn Analysis</h3>
-                <p>Exploratory data analysis to identify customer churn factors and suggest retention strategies.</p>
-              </div>
-            </article>
-            <article class="project-card">
-              <img src="https://placehold.co/1200x600/svg?text=Portfolio+Template" alt="Responsive portfolio template preview" />
-              <div class="project-content">
-                <h3>Responsive Portfolio Template</h3>
-                <p>This very website: a responsive portfolio with smooth scroll, theme toggle, and JS interactivity.</p>
-              </div>
-            </article>
+
+          <div class="row wrap gap" style="margin-bottom:.6rem">
+            <select id="filterSelect" aria-label="Filter by type">
+              <option value="all">All Types</option>
+              <option value="web">Web</option>
+              <option value="ml">ML</option>
+              <option value="mobile">Mobile</option>
+            </select>
+            <input id="searchInput" type="search" placeholder="Search projects…" aria-label="Search projects" />
           </div>
+
+          <div class="project-grid" id="projectsGrid"></div>
+          <p id="emptyState" class="muted hidden">No projects found.</p>
         </div>
       </section>
 
       <!-- Skills -->
       <section id="skills" class="section">
-        <div class="container">
+        <div class="container card">
           <h2>Skills</h2>
           <ul class="skills-list">
-            <li>Python </li>
+            <li>Python</li>
             <li>SQL</li>
             <li>Data Visualization (Matplotlib, Seaborn, Power BI)</li>
             <li>Statistics & Data Cleaning</li>
@@ -115,22 +126,30 @@
 
       <!-- Contact -->
       <section id="contact" class="section">
-        <div class="container">
+        <div class="container card">
           <h2>Contact</h2>
           <form id="contactForm" class="contact-form" novalidate>
             <div class="field">
               <label for="name">Name</label>
               <input id="name" name="name" type="text" required placeholder="Your name" />
+              <small class="error-msg"></small>
             </div>
             <div class="field">
               <label for="email">Email</label>
               <input id="email" name="email" type="email" required placeholder="you@example.com" />
+              <small class="error-msg"></small>
             </div>
             <div class="field">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required placeholder="Write your message"></textarea>
+              <textarea id="message" name="message" rows="5" minlength="10" required placeholder="Write your message"></textarea>
+              <small class="error-msg"></small>
             </div>
-            <button type="submit" class="btn">Send</button>
+
+            <div class="row gap">
+              <button type="submit" class="btn">Send</button>
+              <button type="button" id="aiDraftBtn" class="btn" title="Use AI to draft">✨ AI Draft</button>
+            </div>
+
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -144,7 +163,6 @@
       </div>
     </footer>
 
-    <!-- Link external JS -->
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
   </body>
 </html>

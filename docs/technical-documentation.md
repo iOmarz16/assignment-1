@@ -1,26 +1,22 @@
-## Overview
-This project is a simple personal portfolio website built with **HTML, CSS, and JavaScript**.  
-It meets the requirements of Assignment 1: responsive design, interactivity, and AI integration.
+# Technical Records
 
-## Files
-- **index.html** → Structure of the website (About, Projects, Skills, Contact).
-- **css/styles.css** → Styling (layout, colors, responsive design).
-- **js/script.js** → JavaScript interactivity:
-  - Greeting message by time of day
-  - Dark/Light theme toggle (with localStorage)
-  - Smooth scrolling for navigation links
-  - Contact form handler (front-end only)
+ ## Architecture: **index.html:** Semantic layout (footer, sections, header/nav).
 
-## Responsiveness
-- Mobile-first design.
-- Uses Flexbox and Grid layouts.
-- Tested on desktop, tablet, and mobile screen sizes.
+ - **css/styles.css:** CSS variables, light/dark themes, helpers (.hidden,.fade), and transitions.
+ - **js/script.js:** Theme toggle (LocalStorage), greeting + stored name, smooth scroll, projects (filter/search + empty state), API fetch (loading/error/retry), validation of contact forms, AI draft).
 
-## Known Limitations
-- Contact form has no backend (demo only).
-- Images are placeholders and can be replaced with real ones later.
+ ## Data Management: **LocalStorage:** `username`, `pref-theme`.
+ - **API:** `GET https://catfact.ninja/fact` with error fallback + retry and loading.
 
-## Future Improvements
-- Add more projects with real screenshots.
-- Deploy with custom domain.
-- Connect the contact form to a backend service (e.g., Formspree).
+ ## User Experience/Error Management
+ - `aria-invalid` and inline field errors.
+ - `aria-live="polite"` for status updates.
+ An API loading indicator and retry button.
+ The project grid is in an empty state.
+
+ ## Performance & Animations
+ - Light hover micro-interactions and CSS fade-in on mount (`.fade.show`).
+ To prevent layout thrash when revealing cards, use `requestAnimationFrame`.
+ Minimal footprint due to the lack of heavy dependencies.
+
+ ## Compatibility: Operates on contemporary web browsers.  Progressive enhancement: when JS is enabled, the user experience is improved, but content is still accessible without it.
