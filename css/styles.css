@@ -1,5 +1,5 @@
 :root{
-  --bg:#ffffff;--text:#0b0f14;--muted:#6b7280;--primary:#2563eb;
+  --bg:#ffffff;--text:#114d97;--muted:#6b7280;--primary:#2563eb;
   --surface:#001642;--border:#e5e7eb;--shadow:0 6px 20px rgba(0,0,0,.06)
 }
 :root[data-theme="dark"]{
