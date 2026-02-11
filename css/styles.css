@@ -1,9 +1,9 @@
 :root{
   --bg:#ffffff;--text:#0b0f14;--muted:#6b7280;--primary:#2563eb;
-  --surface:#f3f4f6;--border:#e5e7eb;--shadow:0 6px 20px rgba(0,0,0,.06)
+  --surface:#466fc0;--border:#e5e7eb;--shadow:0 6px 20px rgba(0,0,0,.06)
 }
 :root[data-theme="dark"]{
-  --bg:#0b0f14;--text:#eef2f7;--muted:#9aa3b2;--primary:#60a5fa;
+  --bg:#084ea3;--text:#eef2f7;--muted:#9aa3b2;--primary:#052853;
   --surface:#111827;--border:#1f2937
 }
 
