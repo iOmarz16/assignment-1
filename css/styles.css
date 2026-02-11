@@ -3,7 +3,7 @@
   --surface:#466fc0;--border:#e5e7eb;--shadow:0 6px 20px rgba(0,0,0,.06)
 }
 :root[data-theme="dark"]{
-  --bg:#084ea3;--text:#eef2f7;--muted:#9aa3b2;--primary:#052853;
+  --bg:#0d5bb3;--text:#eef2f7;--muted:#033b9c;--primary:#052853;
   --surface:#111827;--border:#1f2937
 }
 
